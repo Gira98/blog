@@ -1,7 +1,8 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build:clean",
   "outputDirectory": "dist",
   "framework": "vite",
+  "installCommand": "npm ci",
   "rewrites": [
     {
       "source": "/(.*)",

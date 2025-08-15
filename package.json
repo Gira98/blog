@@ -12,7 +12,9 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
     "format": "prettier --write",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean": "rm -rf dist node_modules/.vite",
+    "build:clean": "npm run clean && npm run build"
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
