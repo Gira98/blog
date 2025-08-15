@@ -1,3 +1,3 @@
 import NewArticle from "./NewArticle";
 
-export default NewArticle
+export default NewArticle;

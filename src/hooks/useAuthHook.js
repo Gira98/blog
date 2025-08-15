@@ -16,7 +16,7 @@ function useAuthHook() {
       try {
         const data = await getCurrentUser().unwrap();
         dispatch(
-          setCredentials({ user: data.user, token: data.user?.token || token })
+          setCredentials({ user: data.user, token: data.user?.token || token }),
         );
       } catch (e) {
         console.error(e);

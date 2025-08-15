@@ -10,7 +10,6 @@ import shared from "../../assets/styles/shared.module.scss";
 import { articleSchema } from "../../utils/validationSchemas";
 
 function NewArticle() {
-
   const {
     register,
     handleSubmit,
@@ -31,7 +30,6 @@ function NewArticle() {
     name: "tagList",
   });
 
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
 
@@ -40,7 +38,7 @@ function NewArticle() {
   const onSubmit = async (data) => {
     try {
       const result = await createArticle({ article: data }).unwrap();
-      console.log(result);
+
       navigate(`/articles/${result.article.slug}`);
     } catch (e) {
       console.log(e);
@@ -100,11 +98,7 @@ function NewArticle() {
                 className={shared.input}
                 placeholder="Tag"
               />
-              <Button
-                type="text"
-                danger
-                onClick={() => remove(index)}
-              >
+              <Button type="text" danger onClick={() => remove(index)}>
                 Delete
               </Button>
               {errors.tagList?.[index] && (

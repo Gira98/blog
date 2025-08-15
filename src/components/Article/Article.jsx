@@ -4,18 +4,25 @@ import Markdown from "markdown-to-jsx";
 import { format } from "date-fns";
 import { Tag, Spin, Alert, Button, Popconfirm } from "antd";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useGetArticleBySlugQuery, useDeleteArticleMutation, useFavoriteArticleMutation, useUnfavoriteArticleMutation } from "../../store/articlesApi";
+import {
+  useGetArticleBySlugQuery,
+  useDeleteArticleMutation,
+  useFavoriteArticleMutation,
+  useUnfavoriteArticleMutation,
+} from "../../store/articlesApi";
 import { HeartTwoTone, HeartFilled } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../slices/authSlice";
-      
+
 function Article() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
+
   const [deleteArticle] = useDeleteArticleMutation();
   const [favoriteArticle] = useFavoriteArticleMutation();
   const [unfavoriteArticle] = useUnfavoriteArticleMutation();
+
   const handleDate = (date = new Date()) =>
     format(new Date(date), "MMMM d, yyyy");
 
@@ -25,9 +32,9 @@ function Article() {
 
   const handleLike = async () => {
     if (!currentUser) {
-      return; 
+      return;
     }
-    
+
     try {
       if (article.favorited) {
         await unfavoriteArticle(slug).unwrap();
@@ -35,7 +42,7 @@ function Article() {
         await favoriteArticle(slug).unwrap();
       }
     } catch (error) {
-      console.error('Ошибка при обработке лайка', error);
+      console.error("Ошибка при обработке лайка", error);
     }
   };
 
@@ -64,8 +71,6 @@ function Article() {
       />
     );
 
-  console.log(data);
-
   const { article } = data;
 
   return (
@@ -87,9 +92,15 @@ function Article() {
             </div>
           </div>
           <div className={styles.likes}>
-            <Button 
-              type="text" 
-              icon={article.favorited ? <HeartFilled style={{ color: '#eb2f96' }} /> : <HeartTwoTone twoToneColor="#eb2f96" />}
+            <Button
+              type="text"
+              icon={
+                article.favorited ? (
+                  <HeartFilled style={{ color: "#eb2f96" }} />
+                ) : (
+                  <HeartTwoTone twoToneColor="#eb2f96" />
+                )
+              }
               onClick={handleLike}
               className={styles.likeButton}
               disabled={!currentUser}
@@ -101,7 +112,7 @@ function Article() {
         </div>
 
         <div className={styles.header__right}>
-          <div className={styles.user_date}>  
+          <div className={styles.user_date}>
             <div className={styles.user}>{article.author.username}</div>
             <div className={styles.date}>{handleDate(article.createdAt)}</div>
           </div>
@@ -124,13 +135,13 @@ function Article() {
               <Link to={`/articles/${slug}/edit`}>
                 <Button type="dashed">Edit</Button>
               </Link>
-                          <Popconfirm
-              title="Delete article"
-              description="Are you sure you want to delete this article?"
-              onConfirm={handleDelete}
-              okText="Yes"
-              cancelText="No"
-            >
+              <Popconfirm
+                title="Delete article"
+                description="Are you sure you want to delete this article?"
+                onConfirm={handleDelete}
+                okText="Yes"
+                cancelText="No"
+              >
                 <Button type="text" danger>
                   Delete
                 </Button>

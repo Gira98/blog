@@ -20,7 +20,7 @@ export const articlesApi = createApi({
     getArticles: builder.query({
       query: ({ page, limit }) => {
         const offset = (page - 1) * limit;
-        console.log(page);
+
         return `/articles?limit=${limit}&offset=${offset}`;
       },
       providesTags: ["Articles"],

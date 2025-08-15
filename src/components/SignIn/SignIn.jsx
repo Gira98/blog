@@ -20,7 +20,7 @@ const SignIn = () => {
   });
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [loginUser] = useLoginUserMutation();
 
@@ -29,9 +29,8 @@ const SignIn = () => {
   const handleLoginUser = async (user) => {
     try {
       const result = await loginUser({ user }).unwrap();
-      console.log("Logged user:", result);
       dispatch(setCredentials({ user: result.user, token: result.user.token }));
-      navigate('/articles')
+      navigate("/articles");
     } catch (error) {
       console.error("Login error:", error);
 
@@ -79,18 +78,18 @@ const SignIn = () => {
 
         <p className={styles.error}>{errors.password?.message}</p>
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            size="large"
-            className={styles.button}
-          >
-            Sign In
-          </Button>
+        <Button
+          type="primary"
+          htmlType="submit"
+          size="large"
+          className={styles.button}
+        >
+          Sign In
+        </Button>
       </div>
 
       <div className={styles.question}>
-        Don't have an account?{" "}
+        {`Don't have an account? `}
         <Link to="/sign-up" className={styles.link}>
           Sign Up
         </Link>

@@ -60,7 +60,6 @@ function EditProfile() {
       dispatch(setCredentials({ user: result.user, token: result.user.token }));
       navigate("/articles");
       console.log("Updated user:", result);
-      
     } catch (error) {
       console.error("Edit user error:", error);
 

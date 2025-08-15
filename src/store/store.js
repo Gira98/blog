@@ -1,12 +1,9 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import { articlesApi } from './articlesApi'
-import { authApi } from './authApi';
-import articlesReducer from '../slices/articlesSlice'
-import authReducer from '../slices/authSlice';
-
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { articlesApi } from "./articlesApi";
+import { authApi } from "./authApi";
+import authReducer from "../slices/authSlice";
 
 const rootReducer = combineReducers({
-  articles: articlesReducer,
   auth: authReducer,
   [articlesApi.reducerPath]: articlesApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
@@ -14,7 +11,8 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(articlesApi.middleware, authApi.middleware)
-})
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(articlesApi.middleware, authApi.middleware),
+});
 
-export default store
+export default store;

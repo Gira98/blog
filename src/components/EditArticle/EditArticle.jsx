@@ -13,7 +13,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { articleSchema } from "../../utils/validationSchemas";
 
 function EditArticle() {
-
   const {
     register,
     handleSubmit,
@@ -53,9 +52,19 @@ function EditArticle() {
 
   const onSubmit = async (formData) => {
     try {
-      const cleanedTags = (formData.tagList || []).filter((t) => t && t.trim() !== "");
-      const articleData = { title: formData.title, body: formData.body, description: formData.description, tagList: cleanedTags };
-      const result = await editArticle({ slug, article: { article: articleData } }).unwrap();
+      const cleanedTags = (formData.tagList || []).filter(
+        (t) => t && t.trim() !== "",
+      );
+      const articleData = {
+        title: formData.title,
+        body: formData.body,
+        description: formData.description,
+        tagList: cleanedTags,
+      };
+      const result = await editArticle({
+        slug,
+        article: { article: articleData },
+      }).unwrap();
       navigate(`/articles/${result.article.slug}`);
     } catch (e) {
       console.log(e);

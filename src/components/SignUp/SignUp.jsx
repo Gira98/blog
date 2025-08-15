@@ -51,7 +51,6 @@ const SignUp = () => {
       const result = await addUser({ user }).unwrap();
       dispatch(setCredentials({ user: result.user, token: result.user.token }));
       navigate("/articles");
-      console.log("Registered user:", result);
     } catch (error) {
       console.error("Registration error:", error);
 
@@ -126,11 +125,10 @@ const SignUp = () => {
           <p className={styles.error}>{errors.agreement?.message}</p>
         </div>
 
+        <Button type="primary" htmlType="submit" className={styles.button}>
+          Create
+        </Button>
 
-          <Button type="primary" htmlType="submit" className={styles.button}>
-            Create
-          </Button>
-  
         <div className={styles.question}>
           Already have an account?{" "}
           <Link to="/sign-in" className={styles.link}>
