@@ -10,7 +10,7 @@ export default defineConfig({
         cache: false,
         include: ["src/**/*.js", "src/**/*.jsx"],
         emitWarning: true,
-        emitError: false, 
+        emitError: false,
       }),
   ].filter(Boolean),
   build: {
