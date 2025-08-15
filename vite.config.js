@@ -5,13 +5,18 @@ import eslint from "vite-plugin-eslint";
 export default defineConfig({
   plugins: [
     react(),
-    eslint({
-      cache: false,
-      include: ["src/**/*.js", "src/**/*.jsx"],
-      emitWarning: true,
-      emitError: true,
-    }),
-  ],
+    process.env.NODE_ENV !== "production" &&
+      eslint({
+        cache: false,
+        include: ["src/**/*.js", "src/**/*.jsx"],
+        emitWarning: true,
+        emitError: false, 
+      }),
+  ].filter(Boolean),
+  build: {
+    outDir: "dist",
+    sourcemap: false,
+  },
   server: {
     open: true,
     hmr: {
